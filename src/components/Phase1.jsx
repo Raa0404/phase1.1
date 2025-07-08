@@ -4,6 +4,7 @@ function Phase1({ solId, setSolId, onNext }) {
   const [userName, setUserName] = useState('');
   const [language, setLanguage] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const isSolValid = solId >= 8701 && solId <= 8771;
   const isFormValid = userName && isSolValid && language;
@@ -14,13 +15,42 @@ function Phase1({ solId, setSolId, onNext }) {
     setSolId(value);
   };
 
-  const handleProceed = () => {
+  const handleProceed = async () => {
     if (!isFormValid) {
       setError('Please fill all fields correctly.');
       return;
     }
-    setError('');
-    onNext();
+
+    setLoading(true);
+    const data = {
+      Name: userName,
+      "SOL ID": solId,
+      Language: language,
+      Timestamp: new Date().toLocaleString()
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.sheetbest.com/sheets/23082146-1b44-445c-98e3-548981f48eaf",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        }
+      );
+      if (response.ok) {
+        setError('');
+        onNext();
+      } else {
+        setError("Failed to submit data. Please try again.");
+      }
+    } catch (error) {
+      setError("Error connecting to server.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -49,8 +79,8 @@ function Phase1({ solId, setSolId, onNext }) {
 
       {error && <p className="error">{error}</p>}
 
-      <button onClick={handleProceed} disabled={!isFormValid}>
-        Proceed
+      <button onClick={handleProceed} disabled={!isFormValid || loading}>
+        {loading ? "Submitting..." : "Proceed"}
       </button>
     </div>
   );
