@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
-  const [userName, setUserName] = useState('');
-  const [language, setLanguage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [localLanguage, setLocalLanguage] = useState('');
+  const [localUserName, setLocalUserName] = useState('');
 
   const isSolValid = solId >= 8701 && solId <= 8771;
-  const isFormValid = userName && isSolValid && language;
+  const isFormValid = localUserName && isSolValid && localLanguage;
 
   const handleSolChange = (e) => {
     const value = e.target.value;
@@ -22,10 +22,13 @@ function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
     }
 
     setLoading(true);
+    setLanguage(localLanguage);
+    setUserName(localUserName);
+
     const data = {
-      Name: userName,
+      Name: localUserName,
       "SOL ID": solId,
-      Language: language,
+      Language: localLanguage,
       Timestamp: new Date().toLocaleString()
     };
 
@@ -60,9 +63,8 @@ function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
       <input
         type="text"
         placeholder="Enter your name"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        
+        value={localUserName}
+        onChange={(e) => setLocalUserName(e.target.value)}
       />
 
       <input
@@ -72,8 +74,7 @@ function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
         onChange={handleSolChange}
       />
 
-      <select value={language} onChange={(e) => setLanguage(e.target.value)}
-        >
+      <select value={localLanguage} onChange={(e) => setLocalLanguage(e.target.value)}>
         <option value="">Select Language</option>
         <option value="en">English</option>
         <option value="hi">हिंदी</option>
@@ -84,7 +85,8 @@ function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
       <button onClick={handleProceed} disabled={!isFormValid || loading}>
         {loading ? "Submitting..." : "Proceed"}
       </button>
-          <footer style={{ marginTop: '2rem', color: '#999' }}>
+
+      <footer style={{ marginTop: '2rem', color: '#999' }}>
         © P.Raa
       </footer>
     </div>
