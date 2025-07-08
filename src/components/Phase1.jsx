@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Phase1({ solId, setSolId, onNext }) {
+function Phase1({ solId, setSolId, onNext, setLanguage, setUserName }) {
   const [userName, setUserName] = useState('');
   const [language, setLanguage] = useState('');
   const [error, setError] = useState('');
@@ -62,6 +62,7 @@ function Phase1({ solId, setSolId, onNext }) {
         placeholder="Enter your name"
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
+        
       />
 
       <input
@@ -71,7 +72,8 @@ function Phase1({ solId, setSolId, onNext }) {
         onChange={handleSolChange}
       />
 
-      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+      <select value={language} onChange={(e) => setLanguage(e.target.value)}
+        >
         <option value="">Select Language</option>
         <option value="en">English</option>
         <option value="hi">हिंदी</option>

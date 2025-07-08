@@ -6,6 +6,8 @@ import './styles/app.css';
 function App() {
   const [phase, setPhase] = useState(1);
   const [solId, setSolId] = useState('');
+  const [language, setLanguage] = useState('en');
+  const [userName, setUserName] = useState('');
 
   return (
     <div className="app-container">
@@ -14,12 +16,15 @@ function App() {
           solId={solId}
           setSolId={setSolId}
           onNext={() => setPhase(2)}
+          setLanguage={setLanguage}
+          setUserName={setUserName}
         />
       )}
       {phase === 2 && (
         <Phase2
           onBack={() => setPhase(1)}
           onNext={() => setPhase(3)}
+          language={language}
         />
       )}
       {phase === 3 && (
