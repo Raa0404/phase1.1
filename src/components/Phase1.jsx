@@ -82,6 +82,9 @@ function Phase1({ solId, setSolId, onNext }) {
       <button onClick={handleProceed} disabled={!isFormValid || loading}>
         {loading ? "Submitting..." : "Proceed"}
       </button>
+          <footer style={{ marginTop: '2rem', color: '#999' }}>
+        © P.Raa
+      </footer>
     </div>
   );
 }

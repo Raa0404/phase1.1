@@ -19,7 +19,13 @@ function App() {
       {phase === 2 && (
         <Phase2
           onBack={() => setPhase(1)}
+          onNext={() => setPhase(3)}
         />
+      )}
+      {phase === 3 && (
+        <div className="phase phase3">
+          <h2>Phase 3 (Placeholder)</h2>
+        </div>
       )}
     </div>
   );
