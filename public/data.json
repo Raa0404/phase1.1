@@ -1,0 +1,47 @@
+[
+  {
+    "CIF ID": "CIF001",
+    "Account Number": "ACC1001",
+    "Borrower Name": "Ravi Kumar",
+    "RI+DI": 25000,
+    "DI": 5000,
+    "CIF CURRENT OUTSTANDING": 60000,
+    "CIF PRINCIPAL O/S": 50000,
+    "Actual NPA Date": "2023-01-01",
+    "Notional Dues": 62000,
+    "Write-off": 2000,
+    "Waiver": 3000,
+    "Sacrifice": 1500,
+    "Minimum Compromise Amount": 35000
+  },
+  {
+    "CIF ID": "CIF001",
+    "Account Number": "ACC1002",
+    "Borrower Name": "Ravi Kumar",
+    "RI+DI": 30000,
+    "DI": 6000,
+    "CIF CURRENT OUTSTANDING": 70000,
+    "CIF PRINCIPAL O/S": 55000,
+    "Actual NPA Date": "2023-02-15",
+    "Notional Dues": 72000,
+    "Write-off": 2500,
+    "Waiver": 4000,
+    "Sacrifice": 2000,
+    "Minimum Compromise Amount": 40000
+  },
+  {
+    "CIF ID": "CIF002",
+    "Account Number": "ACC2001",
+    "Borrower Name": "Neha Sharma",
+    "RI+DI": 18000,
+    "DI": 3000,
+    "CIF CURRENT OUTSTANDING": 45000,
+    "CIF PRINCIPAL O/S": 40000,
+    "Actual NPA Date": "2023-03-10",
+    "Notional Dues": 47000,
+    "Write-off": 1500,
+    "Waiver": 1000,
+    "Sacrifice": 800,
+    "Minimum Compromise Amount": 28000
+  }
+]

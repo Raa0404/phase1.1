@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Phase1 from './components/Phase1';
+import Phase2 from './components/Phase2';
 import './styles/app.css';
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
         />
       )}
       {phase === 2 && (
-        <div className="phase-dummy">
-          <h2>Phase 2 (Placeholder)</h2>
-        </div>
+        <Phase2
+          onBack={() => setPhase(1)}
+        />
       )}
     </div>
   );
