@@ -1,38 +1,66 @@
-// Phase 3 component (from canvas)
-import React from "react";
-import { Button } from "@/components/ui/button";
 
-export default function Phase3({ data, onBack }) {
-  if (!data || data.length === 0) return <div className="p-4">No data found.</div>;
+import React from 'react';
 
-  const { "CIF ID": cifId, "Number of Accounts": noOfAccounts, "NPA Category": npaCategory } = data[0];
+export default function Phase3({ accountData, onBack, onFinish }) {
+  if (!accountData || accountData.length === 0) {
+    return (
+      <div className="p-6 bg-orange-100 min-h-screen text-center">
+        <h2 className="text-xl font-bold text-orange-800">No data found for this account</h2>
+        <button
+          onClick={onBack}
+          className="mt-4 px-4 py-2 bg-orange-600 text-white rounded-xl shadow hover:bg-orange-700"
+        >
+          Back
+        </button>
+      </div>
+    );
+  }
+
+  const { cifId, npaDate, npaCategory } = accountData[0];
+  const numberOfAccounts = accountData.length;
 
   return (
-    <div className="p-4 bg-orange-100 min-h-screen">
-      <div className="text-right text-sm font-semibold text-red-600">© P.Raa</div>
+    <div className="p-6 bg-orange-50 min-h-screen text-orange-900">
+      <h1 className="text-3xl font-bold mb-4 text-orange-700">OTS NIVARAN - Phase 3</h1>
 
-      <h2 className="text-xl font-bold text-orange-700 mb-4">Phase 3: Account Settlement Details</h2>
-
-      <div className="mb-4 p-3 bg-orange-200 rounded shadow">
-        <p className="font-semibold">CIF ID: <span className="font-normal">{cifId}</span></p>
-        <p className="font-semibold">Number of Accounts: <span className="font-normal">{noOfAccounts}</span></p>
-        <p className="font-semibold">NPA Category: <span className="font-normal">{npaCategory}</span></p>
+      <div className="bg-white shadow-md rounded-2xl p-4 mb-6">
+        <p className="text-lg font-semibold">CIF ID: {cifId}</p>
+        <p className="text-lg">Number of Accounts: {numberOfAccounts}</p>
+        <p className="text-lg">NPA Date: {npaDate}</p>
+        <p className="text-lg">NPA Category: {npaCategory}</p>
       </div>
 
-      <div className="space-y-2">
-        {data.map((acc, idx) => (
-          <div key={idx} className="bg-white rounded p-3 shadow text-sm">
-            <p>
-              <strong>{acc["Account Number"]}</strong> | {acc["Borrower Name"]} | {acc["NPA Date"]?.toString().slice(0, 10)} | ₹{acc["CIF Outstanding"]} O/S | ₹{acc["Principal O/S"]} Principal | ₹{acc["Notional Dues"]} Dues | ₹{acc["Minimum Settlement"]} Min Settlement | ₹{acc["Write-Off"]} Write-Off | ₹{acc["Waiver"]} Waiver | ₹{acc["Sacrifice"]} Sacrifice
-            </p>
-          </div>
-        ))}
+      {accountData.map((account, index) => (
+        <div key={index} className="bg-orange-100 p-4 rounded-2xl mb-4 shadow">
+          <p><span className="font-semibold">Account No:</span> {account.accountNumber}</p>
+          <p><span className="font-semibold">CIF CURRENT O/S:</span> {account.cifCurrentOS}</p>
+          <p><span className="font-semibold">CIF PRINCIPAL O/S:</span> {account.cifPrincipalOS}</p>
+          <p><span className="font-semibold">Notional Dues:</span> {account.notionalDues}</p>
+          <p><span className="font-semibold">Write-Off:</span> {account.writeOff}</p>
+          <p><span className="font-semibold">Waiver:</span> {account.waiver}</p>
+          <p><span className="font-semibold">Sacrifice:</span> {account.sacrifice}</p>
+          <p><span className="font-semibold">Minimum Settlement Amt:</span> {account.minimumSettlement}</p>
+        </div>
+      ))}
+
+      <div className="flex justify-between mt-8">
+        <button
+          onClick={onBack}
+          className="px-6 py-2 bg-orange-600 text-white rounded-xl shadow hover:bg-orange-700"
+        >
+          Back
+        </button>
+        <button
+          onClick={onFinish}
+          className="px-6 py-2 bg-orange-600 text-white rounded-xl shadow hover:bg-orange-700"
+        >
+          Finish
+        </button>
       </div>
 
-      <div className="mt-6 flex justify-between">
-        <Button variant="outline" onClick={onBack}>Back</Button>
-        <Button className="bg-orange-500 hover:bg-orange-600 text-white">Finish</Button>
-      </div>
+      <footer className="mt-12 text-right text-orange-600 font-bold">
+        © P.Raa
+      </footer>
     </div>
   );
 }
